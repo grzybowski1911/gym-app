@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+    <h1>Workout Page</h1>
+
+    <form method="post" id="formProfile" action="/workouts/add-workout">
+
+        <div class="form-group">
+            <label for="inputLift">Name of Lift</label>
+            <input id="inputLift" name="lift" placeholder="Input lift" value="" required class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-default">Save</button>
+
+    </form>
+
+{% endblock %}

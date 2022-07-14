@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+    <h1>Input a lift session</h1>
+
+    <form method="post" id="formProfile" action="/workouts/add-workout-session">
+
+        <input type="hidden" id="user" name="user" value="{{ current_user.id }}">
+
+        <div class="form-group">
+            <label for="inputLift">Lift Name</label>
+            <input id="inputLife" name="lift" placeholder="Input Lift Name" value="" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputWeight">Weight</label>
+            <input id="inputWeight" name="weight" placeholder="Input Weight" value="" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputReps">Reps</label>
+            <input id="inputReps" name="reps" placeholder="Input Reps" value="" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputSets">Sets</label>
+            <input id="inputSets" name="sets" placeholder="Input Sets" value="" required class="form-control" />
+        </div>
+
+
+        <button type="submit" class="btn btn-default">Save</button>
+
+    </form>
+
+{% endblock %}

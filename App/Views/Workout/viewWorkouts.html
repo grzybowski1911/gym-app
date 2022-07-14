@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+    <h1>View Workouts</h1>
+    
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Lift</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Wieight</th>
+                        <th scope="col">Reps</th>
+                        <th scope="col">Sets</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for lift in lift_name %}
+                        <tr>
+                            <th scope="col">{{lift.lift_name }}</th>
+                            <td>{{lift.date|date('l')}} - {{lift.date|date('m-d') }}</td>
+                            <td>{{ lift.weight}}</td>
+                            <td>{{ lift.reps}}</td>
+                            <td>{{ lift.sets}}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                          </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
