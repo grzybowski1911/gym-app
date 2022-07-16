@@ -535,19 +535,18 @@ class User extends \Core\Model
 
         $lastWeek = date("Y-m-d", strtotime("-7 days"));
 
-        $lastWeekSql = settype($lastWeek, "integer");
-
-        error_log($lastWeekSql);
-
         if(isset($_SESSION['user_id'])) { 
-            $sql = 'SELECT `date` FROM `lift_sessions` WHERE `date` LIKE "%:lastweek%"';
+            $sql = 'SELECT `date` FROM `lift_sessions` WHERE `date` LIKE CONCAT(:lastweek, "%")';
             $db = static::getDB();
             $stmt = $db->prepare($sql);
             //$stmt->bindValue(':user', $_SESSION['user_id']);
-            $stmt->bindValue(':lastweek', $lastWeekSql);
+            $stmt->bindValue(':lastweek', $lastWeek);
             $stmt->execute();
             error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
+            return;
         }
+
+        return;
 
         //if(isset($_SESSION['user_id'])) {
         //    //$sql = 'SELECT * FROM `lift_sessions` WHERE user = :user AND DATE_FORMAT(date, '%m-%d') = DATE_FORMAT(:date, '%m-%d')';
