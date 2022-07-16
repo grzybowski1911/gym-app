@@ -528,4 +528,38 @@ class User extends \Core\Model
         }
         return;
     }
+
+    public static function compareWeeklyStats() {
+
+        $current_date = date('F, jS');
+
+        $lastWeek = date("Y-m-d", strtotime("-7 days"));
+
+        $lastWeekSql = settype($lastWeek, "integer");
+
+        error_log($lastWeekSql);
+
+        if(isset($_SESSION['user_id'])) { 
+            $sql = 'SELECT `date` FROM `lift_sessions` WHERE `date` LIKE "%:lastweek%"';
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            //$stmt->bindValue(':user', $_SESSION['user_id']);
+            $stmt->bindValue(':lastweek', $lastWeekSql);
+            $stmt->execute();
+            error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
+        }
+
+        //if(isset($_SESSION['user_id'])) {
+        //    //$sql = 'SELECT * FROM `lift_sessions` WHERE user = :user AND DATE_FORMAT(date, '%m-%d') = DATE_FORMAT(:date, '%m-%d')';
+        //    $sql2 = 'SELECT * FROM lift_sessions WHERE DATE_FORMAT(:date1, %M %d) = DATE_FORMAT(:date2, %M %d';
+        //    $db = static::getDB();
+        //    $stmt = $db->prepare($sql);
+        //    $stmt->bindValue(':user', $_SESSION['user_id']);
+        //    $stmt->bindValue(':date', $_SESSION['user_id']);
+        //    $stmt->execute();
+        //    //error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
+        //    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //}
+        //return;
+    }
 }

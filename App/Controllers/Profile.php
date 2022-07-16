@@ -33,6 +33,7 @@ class Profile extends Authenticated
      */
     public function showAction()
     {
+        $this->user->compareWeeklyStats();
         View::renderTemplate('Profile/show.html', [
             'user' => $this->user
         ]);
