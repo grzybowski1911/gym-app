@@ -7,7 +7,9 @@
     <h1>Welcome to the Gym App</h1>
 
     {% if current_user %}
-        Hello {{ current_user.name }}.
+        Hello {{ current_user.name }}
+        <br>
+        <a href="/profile/show">View last weeks lift stats</a>
     {% else %}
         <a href="/signup/new">Sign up</a> or <a href="/login">log in</a>.
     {% endif %}

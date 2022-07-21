@@ -6,13 +6,13 @@
 
     <h1>Profile</h1>
 
-    <dl class="dl-horizontal">
+    <!--<dl class="dl-horizontal">
         <dt>Name</dt>
         <dd>{{ user.name }}</dd>
         <dt>email</dt>
         <dd>{{ user.email }}</dd>
-    </dl>
-
+    </dl>-->
+    {% if last_week_stats %}
     <table class="table">
         <thead>
           <tr>
@@ -37,6 +37,16 @@
               </tr>
         </tbody>
       </table>
+      {% else %}
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                <p>No lifts to report from last week</p>
+                <img src="../assets/didnt-work-out.gif" alt="">
+              </div>
+          </div>
+      </div>
+      {% endif %}
 
     <a href="/profile/edit">Edit</a>
 

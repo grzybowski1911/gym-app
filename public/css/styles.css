@@ -1,6 +1,10 @@
 body {
     margin-top: 3em;
 }
+
+img {
+    width: 100%;
+}
 /*
 .alert {
     border: 1px solid #ccc;
