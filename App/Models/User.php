@@ -536,29 +536,16 @@ class User extends \Core\Model
         $lastWeek = date("Y-m-d", strtotime("-7 days"));
 
         if(isset($_SESSION['user_id'])) { 
-            $sql = 'SELECT `date` FROM `lift_sessions` WHERE `date` LIKE CONCAT(:lastweek, "%")';
+            $sql = 'SELECT * FROM `lift_sessions` WHERE `date` LIKE CONCAT(:lastweek, "%") AND `user` =:user';
             $db = static::getDB();
             $stmt = $db->prepare($sql);
-            //$stmt->bindValue(':user', $_SESSION['user_id']);
+            $stmt->bindValue(':user', $_SESSION['user_id']);
             $stmt->bindValue(':lastweek', $lastWeek);
             $stmt->execute();
-            error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
-            return;
+            //error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return;
-
-        //if(isset($_SESSION['user_id'])) {
-        //    //$sql = 'SELECT * FROM `lift_sessions` WHERE user = :user AND DATE_FORMAT(date, '%m-%d') = DATE_FORMAT(:date, '%m-%d')';
-        //    $sql2 = 'SELECT * FROM lift_sessions WHERE DATE_FORMAT(:date1, %M %d) = DATE_FORMAT(:date2, %M %d';
-        //    $db = static::getDB();
-        //    $stmt = $db->prepare($sql);
-        //    $stmt->bindValue(':user', $_SESSION['user_id']);
-        //    $stmt->bindValue(':date', $_SESSION['user_id']);
-        //    $stmt->execute();
-        //    //error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
-        //    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //}
-        //return;
     }
 }

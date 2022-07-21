@@ -64,6 +64,7 @@ class View
             $twig->addGlobal('current_user', \App\Auth::getUser());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('lift_name', \App\Models\User::getLifts());
+            $twig->addGlobal('last_week_stats', \App\Models\User::compareWeeklyStats());
         }
 
         return $twig->render($template, $args);

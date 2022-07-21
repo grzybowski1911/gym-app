@@ -13,6 +13,31 @@
         <dd>{{ user.email }}</dd>
     </dl>
 
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Lift</th>
+            <th scope="col">Date</th>
+            <th scope="col">Wieight</th>
+            <th scope="col">Reps</th>
+            <th scope="col">Sets</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for stat in last_week_stats %}
+            <tr>
+                <th scope="col">{{stat.lift_name }}</th>
+                <td>{{stat.date|date('l')}} - {{stat.date|date('m-d') }}</td>
+                <td>{{ stat.weight}}</td>
+                <td>{{ stat.reps}}</td>
+                <td>{{ stat.sets}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              </tr>
+        </tbody>
+      </table>
+
     <a href="/profile/edit">Edit</a>
 
 {% endblock %}
