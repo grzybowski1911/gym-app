@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+    <h1>Edit a lift session</h1>
+
+    <form method="post" id="formProfile" action="/workouts/edit-workout-session">
+
+        <input type="hidden" id="user" name="user" value="{{ current_user.id }}">
+        <input type="hidden" id="liftId" name="liftId" value={{ post_data.liftId }}>
+
+        <select id="category" name="category" class="form-select" aria-label="Default select example">
+            <option selected>Select Lift Category</option>
+            <option value="back">Back</option>
+            <option value="chest">Chest</option>
+            <option value="legs">Legs</option>
+            <option value="shoulders">Shoulders</option>
+            <option value="arms">Arms</option>
+          </select>
+
+        <div class="form-group">
+            <label for="inputLift">Change Lift Name</label>
+            <input id="inputLift" name="lift" placeholder={{ post_data.liftName }} value="" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputWeight">Change Weight</label>
+            <input id="inputWeight" name="weight" placeholder={{ post_data.liftWeight }} value="" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputReps">Change Reps</label>
+            <input id="inputReps" name="reps" placeholder={{ post_data.liftReps }} value="" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="inputSets">Change Sets</label>
+            <input id="inputSets" name="sets" placeholder={{ post_data.liftSets }} value="" required class="form-control" />
+        </div>
+
+
+        <button type="submit" class="btn btn-default">Save</button>
+
+    </form>
+
+{% endblock %}

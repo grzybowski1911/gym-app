@@ -55,6 +55,14 @@
                                 <input type="hidden" name="id" value={{ lift.id }} />
                                 <input type="submit" value="Delete" />
                               </form>
+                              <form method="POST" action="/Workouts/edit-workout-session">
+                                <input type="hidden" name="liftId" id="liftId" value={{ lift.id }} />
+                                <input type="hidden" name="liftName" id="liftName" value={{ lift.lift_name }} />
+                                <input type="hidden" name="liftWeight" id="liftWeight" value={{ lift.weight }} />
+                                <input type="hidden" name="liftReps" id="liftReps" value={{ lift.reps }} />
+                                <input type="hidden" name="liftSets" id="liftSets" value={{ lift.sets }} />
+                                <input type="submit" value="Edit" />
+                              </form>
                             </td>
                           </tr>
                         {% endfor %}
@@ -66,4 +74,5 @@
         </div>
     </div>
 
+ 
 {% endblock %}

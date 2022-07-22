@@ -65,6 +65,7 @@ class View
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('lift_name', \App\Models\User::getLifts());
             $twig->addGlobal('last_week_stats', \App\Models\User::compareWeeklyStats());
+            $twig->addGlobal('post_data', $_POST);
         }
 
         return $twig->render($template, $args);

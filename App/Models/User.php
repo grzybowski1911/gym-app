@@ -566,6 +566,10 @@ class User extends \Core\Model
         }
     }
 
+    public function updateLift() {
+        error_log('update');
+    }
+
     // add lift category to each lift so it can searched for based on what body part is being lfited
     // back, chest, shoulders, legs, arms
     public static function searchByLiftCat() {
