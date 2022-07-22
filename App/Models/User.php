@@ -485,6 +485,7 @@ class User extends \Core\Model
         //error_log('new work out action');
 
         $this->user = $data['user'];
+        $this->category = $data['category'];
         $this->liftname = $data['lift'];
         $this->weight = $data['weight'];
         $this->reps = $data['reps'];
@@ -493,8 +494,8 @@ class User extends \Core\Model
         //$sql = 'INSERT INTO remembered_logins (token_hash, user_id, expires_at)
         //        VALUES (:token_hash, :user_id, :expires_at)';
 
-        $sql = 'INSERT INTO lift_sessions (user, lift_name, weight, reps, sets)
-        VALUES (:user, :liftname, :weight, :reps, :sets)';
+        $sql = 'INSERT INTO lift_sessions (user, category, lift_name, weight, reps, sets)
+        VALUES (:user, :category , :liftname, :weight, :reps, :sets)';
 
         //$sql = 'CREATE TABLE ' . $newLift . '(
         //   Reps varchar(255),
@@ -506,6 +507,7 @@ class User extends \Core\Model
         $db = static::getDB();
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':user', $this->user, PDO::PARAM_STR);
+        $stmt->bindValue(':category', $this->category, PDO::PARAM_STR);
         $stmt->bindValue(':liftname', $this->liftname, PDO::PARAM_STR);
         $stmt->bindValue(':weight', $this->weight, PDO::PARAM_INT);
         $stmt->bindValue(':reps', $this->reps, PDO::PARAM_INT);
@@ -547,5 +549,26 @@ class User extends \Core\Model
         }
 
         return;
+    }
+
+    public function deleteLift($data) {
+
+        $this->liftId = $data['id'];
+
+        if(isset($_SESSION['user_id'])) { 
+            //error_log($this->liftId);
+            $sql = 'DELETE FROM lift_sessions WHERE id =:id';
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':id', $this->liftId);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+
+    // add lift category to each lift so it can searched for based on what body part is being lfited
+    // back, chest, shoulders, legs, arms
+    public static function searchByLiftCat() {
+        //
     }
 }

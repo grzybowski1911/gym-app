@@ -2,6 +2,28 @@
 
 {% block title %}Profile{% endblock %}
 
+{% block footer %}
+    <script src="/js/hideShowPassword.min.js"></script>
+    <script src="/js/app.js"></script>
+
+    <script>
+        $(document).ready(function() {
+          $('.delete-item').click(function (event) {
+              //console.log('delete item');
+              event.preventDefault();
+              var id = $(this).data('id');
+              $.ajax({
+                url: "../Workouts/deleteWorkoutSessionAction",
+                method: "POST",
+                cache: false,
+                data: { id: id }
+              });
+          });
+        });
+    </script>
+
+{% endblock %}
+
 {% block body %}
 
     <h1>View Workouts</h1>
@@ -27,7 +49,14 @@
                             <td>{{ lift.weight}}</td>
                             <td>{{ lift.reps}}</td>
                             <td>{{ lift.sets}}</td>
-                        </tr>
+                            <!--<td><a href="#" data-id="{{ lift.id }}" class="delete-item">Delete</a></td>-->
+                            <td>
+                              <form method="POST" action="/Workouts/delete-workout-session">
+                                <input type="hidden" name="id" value={{ lift.id }} />
+                                <input type="submit" value="Delete" />
+                              </form>
+                            </td>
+                          </tr>
                         {% endfor %}
                         <tr>
                           </tr>
@@ -36,8 +65,5 @@
             </div>
         </div>
     </div>
-
-
-
 
 {% endblock %}

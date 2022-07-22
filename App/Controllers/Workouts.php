@@ -90,4 +90,12 @@ class Workouts extends Authenticated
             'user' => $this->user
         ]);
     }
+
+    public function deleteWorkoutSessionAction() {
+        $this->user->deleteLift($_POST);
+        Flash::addMessage('delete action complete');
+        View::renderTemplate('Workout/viewWorkouts.html', [
+            'user' => $this->user
+        ]);
+    }
 }
