@@ -98,11 +98,18 @@ class Workouts extends Authenticated
             'user' => $this->user
         ]);
     }
-
     public function editWorkoutSessionAction() {
-        error_log($_POST['liftId']);
-        //$this->user->updateLift($_POST);
+        Flash::addMessage('edit workout');
+        View::renderTemplate('Workout/editWorkout.html', [
+            'user' => $this->user
+        ]);
+    }
+
+    public function updateWorkoutSessionAction() {
+        //error_log($_POST['liftId']);
         //Flash::addMessage('update action complete');
+        $this->user->updateLift($_POST);
+        Flash::addMessage('workout update successful');
         View::renderTemplate('Workout/editWorkout.html', [
             'user' => $this->user
         ]);

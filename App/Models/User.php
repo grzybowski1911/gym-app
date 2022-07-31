@@ -566,8 +566,24 @@ class User extends \Core\Model
         }
     }
 
-    public function updateLift() {
-        error_log('update');
+    public function updateLift($data) {
+        //$this->liftId = $data['liftId'];
+
+        $fields = [];
+
+        $fields['user'] = [$data['user'], PDO::PARAM_INT];
+
+        $fields['liftId'] = [$data['liftId'], PDO::PARAM_INT];
+
+        if(! empty($data['category'])) {
+            $fields['category'] = [ $data['category'], PDO::PARAM_STR ];
+        }
+
+        if(! empty($data['lift'])) {
+            $fields['lift'] = [ $data['lift'], PDO::PARAM_STR ];
+        }
+
+        error_log(print_r($fields, true));
     }
 
     // add lift category to each lift so it can searched for based on what body part is being lfited

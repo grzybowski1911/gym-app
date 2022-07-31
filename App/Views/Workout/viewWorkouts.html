@@ -30,31 +30,39 @@
     
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-8">
+            <div class="col-12">
+              {% for lift in lift_name %}
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">Lift</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Wieight</th>
-                        <th scope="col">Reps</th>
-                        <th scope="col">Sets</th>
                       </tr>
                     </thead>
                     <tbody>
-                        {% for lift in lift_name %}
-                        <tr>
-                            <th scope="col">{{lift.lift_name }}</th>
+                          <tr>
+                            <th scope="row">{{lift.lift_name }}</th>
                             <td>{{lift.date|date('l')}} - {{lift.date|date('m-d') }}</td>
+                            <!--<td><a href="#" data-id="{{ lift.id }}" class="delete-item">Delete</a></td>-->
+                          </tr>
+                          <tr>
+                            <th scope="col">Wieight</th>
+                            <th scope="col">Reps</th>
+                            <th scope="col">Sets</th>
+                          </tr>
+                          <tr>
                             <td>{{ lift.weight}}</td>
                             <td>{{ lift.reps}}</td>
                             <td>{{ lift.sets}}</td>
-                            <!--<td><a href="#" data-id="{{ lift.id }}" class="delete-item">Delete</a></td>-->
+                          </tr>
+                          <tr>
                             <td>
                               <form method="POST" action="/Workouts/delete-workout-session">
                                 <input type="hidden" name="id" value={{ lift.id }} />
                                 <input type="submit" value="Delete" />
                               </form>
+                            </td>
+                            <td>
                               <form method="POST" action="/Workouts/edit-workout-session">
                                 <input type="hidden" name="liftId" id="liftId" value={{ lift.id }} />
                                 <input type="hidden" name="liftName" id="liftName" value={{ lift.lift_name }} />
@@ -65,11 +73,9 @@
                               </form>
                             </td>
                           </tr>
-                        {% endfor %}
-                        <tr>
-                          </tr>
                     </tbody>
                   </table>
+                  {% endfor %}
             </div>
         </div>
     </div>
