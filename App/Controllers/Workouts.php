@@ -106,6 +106,9 @@ class Workouts extends Authenticated
     }
 
     public function updateWorkoutSessionAction() {
+
+
+        
         //error_log($_POST['liftId']);
         //Flash::addMessage('update action complete');
         $this->user->updateLift($_POST);

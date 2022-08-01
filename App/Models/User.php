@@ -571,9 +571,8 @@ class User extends \Core\Model
 
         $fields = [];
 
-        $fields['user'] = [$data['user'], PDO::PARAM_INT];
-
-        $fields['liftId'] = [$data['liftId'], PDO::PARAM_INT];
+        //$fields['user'] = [$data['user'], PDO::PARAM_INT];
+        //$fields['liftId'] = [$data['liftId'], PDO::PARAM_INT];
 
         if(! empty($data['category'])) {
             $fields['category'] = [ $data['category'], PDO::PARAM_STR ];
@@ -583,7 +582,39 @@ class User extends \Core\Model
             $fields['lift'] = [ $data['lift'], PDO::PARAM_STR ];
         }
 
-        error_log(print_r($fields, true));
+        if(! empty($data['weight'])) {
+            $fields['weight'] = [ $data['weight'], PDO::PARAM_STR ];
+        }
+
+        if(! empty($data['reps'])) {
+            $fields['reps'] = [ $data['reps'], PDO::PARAM_STR ];
+        }
+
+        if(! empty($data['sets'])) {
+            $fields['sets'] = [ $data['sets'], PDO::PARAM_STR ];
+        }
+
+        $sets = array_map(function($val) {
+            return "$val = :$val";
+        }, array_keys($fields));
+
+        $sql = "UPDATE lift_sessions SET " . implode(", ", $sets) . " WHERE user = :user AND id = :liftId";
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user', $data['user']);
+        $stmt->bindValue(':liftId', $data['liftId']);
+
+        foreach($fields as $name => $values) {
+            $stmt->bindValue(":$name", $values[0], $values[1]);
+        }
+
+        $stmt->execute();
+            
+        return $stmt->rowCount();
+
+        //error_log(print_r($sets, true));
     }
 
     // add lift category to each lift so it can searched for based on what body part is being lfited
