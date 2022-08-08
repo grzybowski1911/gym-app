@@ -619,7 +619,17 @@ class User extends \Core\Model
 
     // add lift category to each lift so it can searched for based on what body part is being lfited
     // back, chest, shoulders, legs, arms
-    public static function searchByLiftCat() {
-        //
+    public static function searchByLiftCat($data) {
+        if(isset($_SESSION['user_id'])) { 
+            $sql = 'SELECT * FROM `lift_sessions` WHERE `category` = :category  AND `user` =:user';
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':user', $_SESSION['user_id']);
+            $stmt->bindValue(':category', $data['category']);
+            $stmt->execute();
+            error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
+            //return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        //error_log($data['category']);
     }
 }

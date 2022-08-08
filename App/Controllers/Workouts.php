@@ -108,7 +108,6 @@ class Workouts extends Authenticated
     public function updateWorkoutSessionAction() {
 
 
-        
         //error_log($_POST['liftId']);
         //Flash::addMessage('update action complete');
         $this->user->updateLift($_POST);
@@ -116,5 +115,10 @@ class Workouts extends Authenticated
         View::renderTemplate('Workout/editWorkout.html', [
             'user' => $this->user
         ]);
+    }
+
+    public function searchByLiftCatAction() {
+        $this->user->searchByLiftCat($_POST);
+        //error_log('')
     }
 }
