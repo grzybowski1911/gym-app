@@ -118,7 +118,9 @@ class Workouts extends Authenticated
     }
 
     public function searchByLiftCatAction() {
-        $this->user->searchByLiftCat($_POST);
-        //error_log('')
+        $this->user->searchByLiftCat();
+        View::renderTemplate('Workout/sortedWorkouts.html', [
+            'user' => $this->user
+        ]);
     }
 }

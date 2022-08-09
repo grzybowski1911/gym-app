@@ -36,7 +36,6 @@
             <select id="category" name="category" class="form-select" aria-label="Default select example">
                 <option selected>Sort by Lift Category</option>
                 <option value="back">Back</option>
-                <option value="core">Core</option>
                 <option value="chest">Chest</option>
                 <option value="legs">Legs</option>
                 <option value="shoulders">Shoulders</option>
@@ -50,7 +49,7 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-12">
-              {% for lift in lift_name %}
+              {% for lift in sorted_lifts %}
                 <table class="table">
                     <thead>
                       <tr>
