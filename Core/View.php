@@ -67,6 +67,7 @@ class View
             $twig->addGlobal('sorted_lifts', \App\Models\User::searchByLiftCat());
             $twig->addGlobal('last_week_stats', \App\Models\User::compareWeeklyStats());
             $twig->addGlobal('post_data', $_POST);
+            $twig->addGlobal('dates_in_db', \App\Models\User::getDates());
         }
 
         return $twig->render($template, $args);

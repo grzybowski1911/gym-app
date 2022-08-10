@@ -632,4 +632,20 @@ class User extends \Core\Model
         }
         //error_log($data['category']);
     }
+
+    public static function getDates() {
+        $sql = 'SELECT date FROM lift_sessions';
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //error_log(print_r($dates, true));
+        $new_dates = [];
+        $regex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/i';
+        foreach($dates as $date) {
+            $clean = preg_match($regex, $date['date'], $m);
+            array_push($new_dates, $m[0]);
+        }
+        return array_unique($new_dates);
+    }
 }
