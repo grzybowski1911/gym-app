@@ -620,7 +620,10 @@ class User extends \Core\Model
     // add lift category to each lift so it can searched for based on what body part is being lfited
     // back, chest, shoulders, legs, arms
     public static function searchByLiftCat() {
-        if(isset($_SESSION['user_id']) && isset($_POST['category']) ) { 
+        //if(isset($_POST['category'])) {
+        //    error_log($_POST['category']);
+        //}
+        if(isset($_SESSION['user_id']) && isset($_POST['category']) && $_POST['category'] != 'Sort by Lift Category' ) {
             $sql = 'SELECT * FROM `lift_sessions` WHERE `category` = :category  AND `user` =:user';
             $db = static::getDB();
             $stmt = $db->prepare($sql);
@@ -630,7 +633,16 @@ class User extends \Core\Model
             //error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        //error_log($data['category']);
+        if(isset($_SESSION['user_id']) && isset($_POST['date']) && $_POST['date'] != 'Sort by Date' ) { 
+            $sql = 'SELECT * FROM `lift_sessions` WHERE `date` LIKE CONCAT(:date, "%")  AND `user` =:user';
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':user', $_SESSION['user_id']);
+            $stmt->bindValue(':date', $_POST['date']);
+            $stmt->execute();
+            //error_log(print_r($stmt->fetchAll(PDO::FETCH_ASSOC), true));
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 
     public static function getDates() {
