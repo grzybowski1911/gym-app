@@ -453,6 +453,7 @@ class User extends \Core\Model
         return false;
     }
 
+    // DELETE
     public function NewWorkout($data) {
 
         $newLift = strtolower(str_replace(' ', '' ,$this->liftname = $data['lift']));
