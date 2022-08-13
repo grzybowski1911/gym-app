@@ -38,6 +38,8 @@ $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 $router->add('{controller}/{action}');
-$router->add('api', ['controller' => 'DataTest', 'action' => 'getData']);
+$router->add('api/dates', ['controller' => 'Api', 'action' => 'getData']);
+$router->add('api/weights', ['controller' => 'Api', 'action' => 'getWeight']);
+
 
 $router->dispatch($_SERVER['QUERY_STRING']);

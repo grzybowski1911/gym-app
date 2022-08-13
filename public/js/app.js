@@ -20,46 +20,85 @@ $.validator.addMethod('validPassword',
     'Must contain at least one letter and one number'
 );
 
-  var oReq = new XMLHttpRequest(); // Create a new request object
-  oReq.onload = function() {
+if(document.getElementById('myChart')) {
 
-    let liftData = (this.responseText);
+    var dateReq = new XMLHttpRequest(); // Create a new request object
+    //dateReq.onload = function() {
+    //  let liftData = (this.responseText);
+    //  let jsonLiftData = JSON.parse(liftData);
+    //  let dates = [];
+    //  for (const property in jsonLiftData) {
+    //      //console.log(`${property}: ${jsonLiftData[property]}`);
+    //      dates.push(jsonLiftData[property]);
+    //  }
+    //  return dates;
+    //};
+  
+    // Send request for data to "api" route
+    dateReq.open("get", "api/dates", true);
+    dateReq.send();
 
-    liftData.forEach()
+    var weightReq = new XMLHttpRequest(); // Create a new request object
+    //weightReq.onload = function() {
+    //  let weightData = (this.responseText);
+    //  let jsonWeightData = JSON.parse(weightData);
+    //  let totalWeight = [];
+    //  for (const property in jsonWeightData) {
+    //      //console.log(`${property}: ${jsonLiftData[property]}`);
+    //      totalWeight.push(jsonWeightData);
+    //  }
+    //  return totalWeight;
+    //};
 
-    console.log(liftData);
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-      ];
+    // Send request for data to "api" route
+    weightReq.open("get", "api/dates", true);
+    weightReq.send();
     
-      const data = {
-        labels: labels,
-        datasets: [{
-          label: 'Weight Moved',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 5, 2, 20, 30, 45],
-        }]
+    const labels =  dateReq.onload = function() {
+  
+        let liftData = (this.responseText);
+    
+        let jsonLiftData = JSON.parse(liftData);
+    
+        let dates = [];
+    
+        for (const property in jsonLiftData) {
+            //console.log(`${property}: ${jsonLiftData[property]}`);
+            dates.push(jsonLiftData[property]);
+        }
+        return dates;
       };
-    
-      const config = {
-        type: 'line',
-        data: data,
-        options: {}
-      };
-    
-      const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-      );
-  };
+      
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Weight Moved',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data:     weightReq.onload = function() {
+                let weightData = (this.responseText);
+                let jsonWeightData = JSON.parse(weightData);
+                let totalWeight = [];
+                for (const property in jsonWeightData) {
+                    //console.log(`${property}: ${jsonLiftData[property]}`);
+                    totalWeight.push(jsonWeightData);
+                }
+          
+                return totalWeight;
+              },
+          }]
+        };
+      
+        const config = {
+          type: 'line',
+          data: data,
+          options: {}
+        };
+      
+        const myChart = new Chart(
+          document.getElementById('myChart'),
+          config
+        );
+}
 
-  // Send request for data to "api" route
-  oReq.open("get", "api", true);
-  oReq.send();
 

@@ -661,4 +661,30 @@ class User extends \Core\Model
         }
         return array_unique($new_dates);
     }
+
+    public static function getWeight() {
+        $dates = self::getDates();
+        $totalWeightMoved = [];
+        foreach ($dates as $date) {
+            $sql = 'SELECT * FROM `lift_sessions` WHERE `date` LIKE CONCAT(:date, "%")  AND `user` =:user';
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':user', $_SESSION['user_id']);
+            $stmt->bindValue(':date', $date);
+            $stmt->execute();
+            $liftData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $totalWeight = 0;
+            foreach($liftData as $lift) {
+                $totalWeight += $lift['weight'] * $lift['reps'] * $lift['sets'];
+            }
+            array_push($totalWeightMoved, $totalWeight);
+        }
+        return $totalWeightMoved;
+
+        // get all data for each date
+
+        // iterate through each item add totals of weight, reps, and sets 
+
+        // add totals to an array with key names of totalWeight, totalReps, totalSets
+    }
 }
