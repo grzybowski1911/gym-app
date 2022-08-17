@@ -647,19 +647,20 @@ class User extends \Core\Model
     }
 
     public static function getDates() {
-        $sql = 'SELECT date FROM lift_sessions';
+        $sql = 'SELECT date FROM lift_sessions WHERE user =:user';
         $db = static::getDB();
         $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user', $_SESSION['user_id']);
         $stmt->execute();
         $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //error_log(print_r($dates, true));
         $new_dates = [];
         $regex = '/[0-9]{4}-[0-9]{2}-[0-9]{2}/i';
         foreach($dates as $date) {
             $clean = preg_match($regex, $date['date'], $m);
             array_push($new_dates, $m[0]);
         }
-        return array_unique($new_dates);
+        $new_dates = array_unique($new_dates);
+        return array_values($new_dates);
     }
 
     public static function getWeight() {
@@ -686,5 +687,16 @@ class User extends \Core\Model
         // iterate through each item add totals of weight, reps, and sets 
 
         // add totals to an array with key names of totalWeight, totalReps, totalSets
+    }
+
+    public static function getLiftData() {
+            $sql = 'SELECT * FROM `lift_sessions` WHERE `user` =:user';
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':user', $_SESSION['user_id']);
+            //$stmt->bindValue(':date', $date);
+            $stmt->execute();
+            $liftData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $liftData;
     }
 }

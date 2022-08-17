@@ -30,4 +30,7 @@ class Api extends \Core\Controller
       echo json_encode(User::getWeight());
     }
 
+    public function liftData(){
+      echo json_encode(User::getLiftData());
+    }
 }

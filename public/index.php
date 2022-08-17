@@ -40,6 +40,6 @@ $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'act
 $router->add('{controller}/{action}');
 $router->add('api/dates', ['controller' => 'Api', 'action' => 'getData']);
 $router->add('api/weights', ['controller' => 'Api', 'action' => 'getWeight']);
-
+$router->add('api/lift-data', ['controller' => 'Api', 'action' => 'liftData']);
 
 $router->dispatch($_SERVER['QUERY_STRING']);
