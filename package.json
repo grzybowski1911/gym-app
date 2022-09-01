@@ -1,0 +1,22 @@
+{
+  "name": "gym-app",
+  "version": "1.0.0",
+  "description": "gym app build tools",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w public/css/scss/main.scss -o public/css --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grzybowski1911/gym-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grzybowski1911/gym-app/issues"
+  },
+  "homepage": "https://github.com/grzybowski1911/gym-app#readme",
+  "dependencies": {
+    "node-sass": "^7.0.1"
+  }
+}

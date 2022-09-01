@@ -1,4 +1,5 @@
 vendor
 App/Config.php
+node_modules
 _DS.Store
 **/.DS_Store
