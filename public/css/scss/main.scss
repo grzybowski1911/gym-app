@@ -21,6 +21,14 @@ img {
 }
 */
 
+/** Helper Class **/
+
+.flex-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /** Typography **/
 
 body {
@@ -72,6 +80,24 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+.form-btn {
+    background: #400E3C;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    min-width: 150px;
+    text-align: center;
+    font-family: 'Rokkitt', serif;
+    letter-spacing: 1.5px;
+    margin-top: 15px;
+    border: none;
+    &:hover {
+        cursor: pointer;
+        color: white;
+    }
+}
+
 /** Navigation **/
 
 .navigation {
@@ -99,6 +125,53 @@ h1, h2, h3, h4, h5, h6 {
     background-image: url('/assets/gym-app-bg.jpg');
     background-size: cover;
     h1 {
+        color: white;
+    }
+}
+
+/** Sign Up Page **/
+
+.new-sign-up {
+    min-height: 100vh;
+    background-image: url('/assets/gym-app-bg-1.jpg');
+    background-size: cover;
+    .sign-up {
+        form {
+            width: 500px;
+            margin-bottom: 30vh;
+            background: rgba(0,0,0,.5);
+            padding: 25px;
+            label {
+                color: white;
+            }
+        }
+    }
+    h1 {
+        color: white;
+    }
+}
+
+/** Log In Page **/
+
+.new-login-page {
+    min-height: 100vh;
+    background-image: url('/assets/gym-app-bg-1.jpg');
+    background-size: cover;
+    .login-page {
+        form {
+            width: 500px;
+            margin-bottom: 30vh;
+            background: rgba(0,0,0,.5);
+            padding: 25px;
+            label {
+                color: white;
+            }
+        }
+    }
+    h1 {
+        color: white;
+    }
+    a {
         color: white;
     }
 }
