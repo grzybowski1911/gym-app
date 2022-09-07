@@ -1,5 +1,5 @@
 body {
-    margin-top: 3em;
+    //margin-top: 3em;
 }
 
 img {
@@ -21,7 +21,68 @@ img {
 }
 */
 
+/** CTA's **/
+
 .btn {
     background: red;
     color: white;
+}
+
+.cta-1 {
+    background: #400E3C;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    min-width: 100px;
+    text-align: center;
+    &:hover {
+        cursor: pointer;
+        color: white;
+    }
+}
+
+.cta-2 {
+    background: #735C19;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    min-width: 100px;
+    text-align: center;
+    &:hover {
+        cursor: pointer;
+        color: white;
+    }
+}
+
+/** Navigation **/
+
+.navigation {
+    background: #212529;
+}
+
+/** Sign Up Login Page**/
+
+.sign-up-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30vh;
+}
+
+/** welcome page **/
+
+.welcome-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('/assets/gym-app-bg.jpg');
+    background-size: cover;
+    h1 {
+        color: white;
+    }
 }

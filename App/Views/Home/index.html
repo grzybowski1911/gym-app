@@ -3,19 +3,34 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
-    <h1>Welcome to the Gym App</h1>
-
-    {% if current_user %}
-        Hello {{ current_user.name }}
-        <br>
-        <a href="/profile/show">View last weeks lift stats</a>
-    {% else %}
-        <a href="/signup/new">Sign up</a> or <a href="/login">log in</a>.
-    {% endif %}
-
-    <div>
-        <canvas id="myChart"></canvas>
+    <div class="container-fluid welcome-page">
+        <div class="row">
+            <div class="col-12">
+                <h1>Welcome to the Gym App</h1>
+                {% if current_user %}
+                    Hello {{ current_user.name }}
+                    <br>
+                    <a href="/profile/show">View last weeks lift stats</a>
+                {% else %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 sign-up-login">
+                <a class="cta-1" href="/signup/new">
+                    Sign Up
+                </a>
+                <br>
+                <a class="cta-2" href="/login">
+                    Log In
+                </a>
+            </div>
+        </div>
     </div>
+    {% endif %}
+    {% if current_user %}
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    {% endif %}
 
 {% endblock %}
